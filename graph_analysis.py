@@ -12,6 +12,27 @@ def write_graph(graph, file):
 def plot_graph():
 
     return 0
+
+def clustering_coefficient(graph):
+    cluster = nx.clustering(graph)
+    return cluster
+
+def neighborhood_overlap(graph):
+
+    return 0
+
+def partition_graph(graph, nodes):
+
+    return 0 
+
+def verify_homophily(graph):
+
+    return 0
+
+def verify_balanced_graph(graph):
+
+    return 0
+
 """
 def plot_graph(graph, initial_node):
     # Compute BFS tree
@@ -37,7 +58,7 @@ def main():
     parser.add_argument('--create_random_graph', action='store_true')
     parser.add_argument('--nodes', type=int, help='Number of nodes for your graph')
     parser.add_argument('--constant', type=float)
-    #parser.add_argument('--BFS', type=int, help='Node to start BFS from')
+    #parser.add_argument('--a', type=int, help='a')
     parser.add_argument('--plot', action='store_true')
     parser.add_argument('--output', type=str, help='Filename for new graph, ex. "out_graph_file.gml"')
 
