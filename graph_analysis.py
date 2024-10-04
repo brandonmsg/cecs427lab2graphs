@@ -9,7 +9,18 @@ def read_graph(filename):
 def write_graph(graph, file):
     nx.write_gml(graph, file)
 
-def plot_graph(graph):
+def plot_graph(graph, graph_type):
+    pos = nx.spring_layout(graph)
+    if graph_type == 'C':
+
+        pass
+    if graph_type == 'N':
+
+        pass
+    if graph_type == 'P':
+        
+        pass
+    #nx.draw()
     plt.show(graph)
 
 def clustering_coefficient(graph):
@@ -19,9 +30,12 @@ def neighborhood_overlap(graph):
 
     pass
 
-def partition_graph(graph, components):
-
-    pass 
+def partition_graph(graph, components): # partitions graph based on inputted components
+    while nx.number_connected_components(graph) < components: # iterates through components until we reach our desired amount
+        betweeness = nx.edge_betweenness_centrality(graph) # networkx function for computing betweeness for edges
+        biggest_edge = max(betweeness, edge=betweeness.get) # gets edge w/ highest betweeness
+        graph.remove_edge(*biggest_edge) # removes edge w/ highest betweeness
+    return graph
 
 def verify_homophily(graph):
 
@@ -67,13 +81,13 @@ def main():
     if args.plot and graph:
         if args.plot == 'C':
             graph = clustering_coefficient(graph)
-            plot_graph(graph)
+            plot_graph(graph, args.plot)
         if args.plot == 'N':
             graph = neighborhood_overlap(graph)
-            plot_graph(graph)
+            plot_graph(graph, args.plot)
         if args.plot == 'P' and args.components:
             graph = partition_graph(graph, args.components)
-            plot_graph(graph)
+            plot_graph(graph, args.plot)
         elif args.plot == 'P' and not args.components:
             print('Please enter number of components if you wanna partition the graph.')
             print('Try again.')
@@ -88,8 +102,9 @@ def main():
         exit
 
     if args.verify_balanced_graph and graph:
-        verify_balanced_graph(graph)
-
+        verified = verify_balanced_graph(graph)
+        return verified
+    
     if args.output and graph:
         write_graph(graph, args.output)
 
