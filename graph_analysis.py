@@ -18,7 +18,7 @@ def plot_graph(graph, graph_type):
 
         pass
     if graph_type == 'P':
-        
+
         pass
     #nx.draw()
     plt.show(graph)
@@ -52,7 +52,7 @@ def verify_balanced_graph(graph):
 
 def parse_args(): # input arguments & check validation
     parser = ap.ArgumentParser(description='Plots graph based on what parameters you put in, i.e. the graph you input and C N P, also verifies balnce and/or homophily of the graph')
-
+    # desired input for running "./graph_analysis.py": (graph,gml) --components n --plot [C|N|P] --verify_homophily --verify_balanced_graph --output out_graph_file.gml
     parser.add_argument('--file', choices=['homophily.gml','imbalanced_graph.gml','balanced_graph.gml'], help='Choose which graph you would like to use: homophily.gml, imbalanced_graph.gml, or balanced_graph.gml')
     parser.add_argument('--components', type=int, help='Amount of componants, used to partition graph')
     parser.add_argument('--plot', choices=['C','N','P'], help='Which plot you would like: cluster coefficient = C, neighborhood overlap = N, partition = P')
